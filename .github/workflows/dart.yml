@@ -27,32 +27,32 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      # Uncomment this step to verify the use of 'dart format' on each commit.
-      # - name: Verify formatting
-      #   run: dart format --output=none --set-exit-if-changed .
+      - name: Set environment variables
+        run: echo "NEWS_API_KEY=${{ secrets.NEWS_API_KEY }}" >> $GITHUB_ENV
 
-      # Consider passing '--fatal-infos' for slightly stricter analysis.
-      # - name: Analyze project source
-      #   run: flutter analyze
-
-      # Your project will need to have tests in test/ and a dependency on
-      # package:test for this step to succeed. Note that Flutter projects will
-      # want to change this to 'flutter test'.
       - name: Run tests
         run: flutter test
 
-      - name: Build debug APK
-        run: flutter build apk --debug
+      - name: Build development APK
+        run: flutter build apk --flavor development -t lib/main_development.dart
 
-      - name: Build release APK
-        run: flutter build apk --release
-
-      - name: Upload APKs to Google Drive
+      - name: Upload development APKs to Google Drive
         env:
           GDRIVE_SERVICE_ACCOUNT: ${{ secrets.GDRIVE_SERVICE_ACCOUNT }}
         run: |
           echo "$GDRIVE_SERVICE_ACCOUNT" > service_account.json
           curl -L https://drive.google.com/drive/u/0/folders/1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0 -o gdrive
           chmod +x gdrive
-          ./gdrive upload --service-account service_account.json --parent '1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0' build/app/outputs/flutter-apk/app-debug.apk
-          ./gdrive upload --service-account service_account.json --parent '1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0' build/app/outputs/flutter-apk/app-release.apk
+          ./gdrive upload --service-account service_account.json --parent '1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0' build/app/outputs/flutter-apk/app-development-release.apk
+
+      - name: Build production APK
+        run: flutter build apk --flavor production -t lib/main_production.dart
+
+      - name: Upload production APKs to Google Drive
+        env:
+          GDRIVE_SERVICE_ACCOUNT: ${{ secrets.GDRIVE_SERVICE_ACCOUNT }}
+        run: |
+          echo "$GDRIVE_SERVICE_ACCOUNT" > service_account.json
+          curl -L https://drive.google.com/drive/u/0/folders/1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0 -o gdrive
+          chmod +x gdrive
+          ./gdrive upload --service-account service_account.json --parent '1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0' build/app/outputs/flutter-apk/app-production-release.apk

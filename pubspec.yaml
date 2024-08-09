@@ -29,6 +29,7 @@ dependencies:
   hive:
   hive_flutter:
   auto_size_text:
+  flutter_dotenv:
 
 dev_dependencies:
   flutter_test:
