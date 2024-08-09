@@ -59,8 +59,8 @@ class _SearchPageState extends State<SearchPage> {
                 color: isDarkTheme ? null : Color(0xFFEFF5F5),
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(
-                  vertical: 24.h,
-                  horizontal: 48.w,
+                  vertical: 8.h,
+                  horizontal: 16.w,
                 ),
                 child: Column(
                   children: [
@@ -74,14 +74,14 @@ class _SearchPageState extends State<SearchPage> {
                             Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
                           ),
                         ),
-                        SizedBox(width: 24.w),
+                        SizedBox(width: 8.w),
                         Expanded(
                           child: Container(
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.grey),
                               borderRadius: BorderRadius.circular(99.0),
                             ),
-                            padding: EdgeInsets.symmetric(horizontal: 36.w),
+                            padding: EdgeInsets.symmetric(horizontal: 8.w),
                             child: Row(
                               children: [
                                 Expanded(
@@ -91,14 +91,14 @@ class _SearchPageState extends State<SearchPage> {
                                       isDense: true,
                                       hintText: 'Searching something?',
                                       hintStyle: TextStyle(
-                                        fontSize: 36.sp,
+                                        fontSize: 16.sp,
                                         color: Colors.grey,
                                       ),
                                       enabledBorder: InputBorder.none,
                                       focusedBorder: InputBorder.none,
                                     ),
                                     style: TextStyle(
-                                      fontSize: 36.sp,
+                                      fontSize: 16.sp,
                                     ),
                                   ),
                                 ),
@@ -108,7 +108,7 @@ class _SearchPageState extends State<SearchPage> {
                                     focusNode: focusNodeIconSearch,
                                     child: Icon(
                                       Icons.search,
-                                      size: 48.w,
+                                      size: 24.w,
                                     ),
                                   ),
                                 ),
@@ -118,7 +118,7 @@ class _SearchPageState extends State<SearchPage> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 16.h),
+                    SizedBox(height: 8.h),
                     Expanded(
                       child: BlocBuilder<TopHeadlinesNewsBloc, TopHeadlinesNewsState>(
                         builder: (context, state) {
@@ -144,7 +144,7 @@ class _SearchPageState extends State<SearchPage> {
                                       DateFormat('yyy-MM-ddTHH:mm:ssZ').parse(itemArticle.publishedAt!, true);
                                   var strPublishedAt = DateFormat('MMM dd, yyyy HH:mm').format(dateTimePublishedAt);
                                   return Padding(
-                                    padding: EdgeInsets.symmetric(vertical: 16.h),
+                                    padding: EdgeInsets.symmetric(vertical: 8.h),
                                     child: ItemNewsWidget(
                                       itemArticle: itemArticle,
                                       strPublishedAt: strPublishedAt,

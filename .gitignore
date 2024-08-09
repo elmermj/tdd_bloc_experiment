@@ -43,3 +43,4 @@ app.*.map.json
 /android/app/release
 .github/workflows/porto-space-app-f8b23646417b.json
 dotenv.env
+test/main.dart
