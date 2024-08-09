@@ -17,6 +17,8 @@ class ItemNewsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
+    String publishedAt = strPublishedAt ?? 'Unkown Date';
+    String source = itemArticle?.source?.name ?? 'Unkown Source';
     return GestureDetector(
       onTap: () async {
         final url = itemArticle?.url;
@@ -116,27 +118,15 @@ class ItemNewsWidget extends StatelessWidget {
                     maxFontSize: 16,
                   ),
                   SizedBox(height: 8.0.w),
-                  Row(
-                    children: [
-                      AutoSizeText(
-                        (strPublishedAt ?? 'Unknown Date') + ' | ',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                        minFontSize: 8,
-                        maxFontSize: 16,
-                      ),
-                      AutoSizeText(
-                        itemArticle?.source?.name ?? 'Unknown Source',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                        minFontSize: 8,
-                        maxFontSize: 16,
-                      ),
-                    ],
+                  AutoSizeText(
+                    publishedAt + ' | ' + source,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                    minFontSize: 8,
+                    maxFontSize: 16,
                   ),
                 ],
               ),

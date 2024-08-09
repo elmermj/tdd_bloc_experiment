@@ -20,8 +20,8 @@ class _SearchPageState extends State<SearchPage> {
   final topHeadlinesNewsBloc = sl<TopHeadlinesNewsBloc>();
   final controllerKeyword = TextEditingController();
   final focusNodeIconSearch = FocusNode();
-  late String keyword;
-  late Timer debounce;
+  String keyword = '';
+  Timer debounce = Timer(Duration.zero, () {});
 
   @override
   void initState() {
