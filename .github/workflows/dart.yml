@@ -33,8 +33,8 @@ jobs:
 
       - name: Download and set up gdrive
         run: |
-          curl -L https://github.com/glotlabs/gdrive/releases/download/3.9.1/gdrive_linux-x64.tar.gz -o gdrive_linux-x64.tar.gz
-          tar -xzf gdrive_linux-x64.tar.gz
+          curl -L https://github.com/prasmussen/gdrive/releases/download/2.1.1/gdrive_2.1.1_linux_amd64.tar.gz -o gdrive_linux-x64.tar.gz
+          tar -xzf gdrive_2.1.1_linux_386.tar.gz
           chmod +x gdrive
 
       - name: Upload development APK to Google Drive
