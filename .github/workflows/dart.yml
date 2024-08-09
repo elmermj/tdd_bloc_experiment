@@ -31,13 +31,17 @@ jobs:
       - name: Build development APK
         run: flutter build apk --flavor development -t lib/main_development.dart
 
+      - name: Download and set up gdrive
+        run: |
+          curl -L https://github.com/glotlabs/gdrive/releases/download/3.9.1/gdrive_linux-x64.tar.gz -o gdrive_linux-x64.tar.gz
+          tar -xzf gdrive_linux-x64.tar.gz
+          chmod +x gdrive
+
       - name: Upload development APK to Google Drive
         env:
           GDRIVE_SERVICE_ACCOUNT: ${{ secrets.GDRIVE_SERVICE_ACCOUNT }}
         run: |
           echo "$GDRIVE_SERVICE_ACCOUNT" > service_account.json
-          curl -L https://raw.githubusercontent.com/prasmussen/gdrive/master/gdrive-linux-x64 -o gdrive
-          chmod +x gdrive
           ./gdrive upload --service-account service_account.json --parent '1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0' --name app-development-release.apk build/app/outputs/flutter-apk/app-development-release.apk
 
       - name: Build production APK
@@ -48,6 +52,4 @@ jobs:
           GDRIVE_SERVICE_ACCOUNT: ${{ secrets.GDRIVE_SERVICE_ACCOUNT }}
         run: |
           echo "$GDRIVE_SERVICE_ACCOUNT" > service_account.json
-          curl -L https://raw.githubusercontent.com/prasmussen/gdrive/master/gdrive-linux-x64 -o gdrive
-          chmod +x gdrive
           ./gdrive upload --service-account service_account.json --parent '1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0' --name app-production-release.apk build/app/outputs/flutter-apk/app-production-release.apk
