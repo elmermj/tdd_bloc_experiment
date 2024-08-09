@@ -8,7 +8,7 @@ import 'injection_container.dart' as di;
 import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
-  await dotenv.load(fileName: dotenvdir);
+  // await dotenv.load(fileName: dotenvdir);
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox('settings');
