@@ -1,8 +1,3 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 name: Dart
 
 on:
@@ -36,23 +31,23 @@ jobs:
       - name: Build development APK
         run: flutter build apk --flavor development -t lib/main_development.dart
 
-      - name: Upload development APKs to Google Drive
+      - name: Upload development APK to Google Drive
         env:
           GDRIVE_SERVICE_ACCOUNT: ${{ secrets.GDRIVE_SERVICE_ACCOUNT }}
         run: |
           echo "$GDRIVE_SERVICE_ACCOUNT" > service_account.json
-          curl -L https://drive.google.com/drive/u/0/folders/1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0 -o gdrive
+          curl -L https://raw.githubusercontent.com/prasmussen/gdrive/master/gdrive-linux-x64 -o gdrive
           chmod +x gdrive
-          ./gdrive upload --service-account service_account.json --parent '1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0' build/app/outputs/flutter-apk/app-development-release.apk
+          ./gdrive upload --service-account service_account.json --parent '1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0' --name app-development-release.apk build/app/outputs/flutter-apk/app-development-release.apk
 
       - name: Build production APK
         run: flutter build apk --flavor production -t lib/main_production.dart
 
-      - name: Upload production APKs to Google Drive
+      - name: Upload production APK to Google Drive
         env:
           GDRIVE_SERVICE_ACCOUNT: ${{ secrets.GDRIVE_SERVICE_ACCOUNT }}
         run: |
           echo "$GDRIVE_SERVICE_ACCOUNT" > service_account.json
-          curl -L https://drive.google.com/drive/u/0/folders/1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0 -o gdrive
+          curl -L https://raw.githubusercontent.com/prasmussen/gdrive/master/gdrive-linux-x64 -o gdrive
           chmod +x gdrive
-          ./gdrive upload --service-account service_account.json --parent '1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0' build/app/outputs/flutter-apk/app-production-release.apk
+          ./gdrive upload --service-account service_account.json --parent '1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0' --name app-production-release.apk build/app/outputs/flutter-apk/app-production-release.apk
