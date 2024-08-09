@@ -137,7 +137,7 @@ void main() {
         final call = newsRemoteDataSource.getTopHeadlinesNews(tCategory);
 
         // assert
-        expect(() => call, throwsA(isA<DioError>()));
+        expect(() => call, throwsA(isA<DioException>()));
       },
     );
   });
@@ -216,7 +216,7 @@ void main() {
         final call = newsRemoteDataSource.searchTopHeadlinesNews(tKeyword);
 
         // assert
-        expect(() => call, throwsA(isA<DioError>()));
+        expect(() => call, throwsA(isA<DioException>()));
       },
     );
   });
