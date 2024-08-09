@@ -1,6 +1,6 @@
 {
-    "name": "clean_code_architecture_tdd",
-    "short_name": "clean_code_architecture_tdd",
+    "name": "tdd_experiment_fix",
+    "short_name": "tdd_experiment_fix",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
