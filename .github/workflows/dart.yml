@@ -42,7 +42,7 @@ jobs:
           GDRIVE_SERVICE_ACCOUNT: ${{ secrets.GDRIVE_SERVICE_ACCOUNT }}
         run: |
           echo "$GDRIVE_SERVICE_ACCOUNT" > service_account.json
-          ./gdrive upload --service-account service_account.json --parent '1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0' --name app-development-release.apk build/app/outputs/flutter-apk/app-development-release.apk
+          gdrive upload --service-account service_account.json --parent '1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0' --name app-development-release.apk build/app/outputs/flutter-apk/app-development-release.apk
 
       - name: Build production APK
         run: flutter build apk --flavor production -t lib/main_production.dart
@@ -52,4 +52,4 @@ jobs:
           GDRIVE_SERVICE_ACCOUNT: ${{ secrets.GDRIVE_SERVICE_ACCOUNT }}
         run: |
           echo "$GDRIVE_SERVICE_ACCOUNT" > service_account.json
-          ./gdrive upload --service-account service_account.json --parent '1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0' --name app-production-release.apk build/app/outputs/flutter-apk/app-production-release.apk
+          gdrive upload --service-account service_account.json --parent '1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0' --name app-production-release.apk build/app/outputs/flutter-apk/app-production-release.apk
