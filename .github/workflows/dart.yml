@@ -34,7 +34,7 @@ jobs:
       - name: Upload development APK to Google Drive
         uses: adityak74/google-drive-upload-git-action@main
         with:
-          credentials: ${{ secrets.GDRIVE_SERVICE_ACCOUNT }}
+          credentials: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_BASE64 }}
           filename: "build/app/outputs/flutter-apk/app-development-release.apk"
           folderId: 1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0
           name: "app-development-release.apk"
@@ -46,7 +46,7 @@ jobs:
       - name: Upload production APK to Google Drive
         uses: adityak74/google-drive-upload-git-action@main
         with:
-          credentials: ${{ secrets.GDRIVE_SERVICE_ACCOUNT }}
+          credentials: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_BASE64 }}
           filename: "build/app/outputs/flutter-apk/app-production-release.apk"
           folderId: 1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0
           name: "app-production-release.apk"
@@ -60,7 +60,7 @@ jobs:
       - name: Mirror Directory Structure
         uses: adityak74/google-drive-upload-git-action@main
         with:
-          credentials: ${{ secrets.GDRIVE_SERVICE_ACCOUNT }}
+          credentials: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_BASE64 }}
           filename: w/x/y/z
           folderId: 1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0
           overwrite: "true"
