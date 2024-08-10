@@ -22,23 +22,6 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Cache gdrive binary
-        id: cache-gdrive
-        uses: actions/cache@v3
-        with:
-          path: gdrive
-          key: gdrive-2.1.1
-
-      - name: Download and set up gdrive
-        if: steps.cache-gdrive.outputs.cache-hit != 'true'
-        run: |
-          curl -L https://github.com/prasmussen/gdrive/releases/download/2.1.1/gdrive_2.1.1_linux_amd64.tar.gz -o gdrive_2.1.1_linux_amd64.tar.gz
-          tar -xzf gdrive_2.1.1_linux_amd64.tar.gz
-          chmod +x gdrive
-
-      - name: Set up gdrive in PATH
-        run: sudo mv gdrive /usr/local/bin/gdrive
-
       - name: Set environment variables
         run: echo "NEWS_API_KEY=${{ secrets.NEWS_API_KEY }}" >> $GITHUB_ENV
 
@@ -49,18 +32,36 @@ jobs:
         run: flutter build apk --flavor development -t lib/main_development.dart
 
       - name: Upload development APK to Google Drive
-        env:
-          GDRIVE_SERVICE_ACCOUNT: ${{ secrets.GDRIVE_SERVICE_ACCOUNT }}
-        run: |
-          echo "$GDRIVE_SERVICE_ACCOUNT" > service_account.json
-          gdrive upload --service-account service_account.json --parent '1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0' --name app-development-release.apk build/app/outputs/flutter-apk/app-development-release.apk
+        uses: adityak74/google-drive-upload-git-action@main
+        with:
+          credentials: ${{ secrets.GDRIVE_SERVICE_ACCOUNT }}
+          filename: "build/app/outputs/flutter-apk/app-development-release.apk"
+          folderId: 1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0
+          name: "app-development-release.apk"
+          overwrite: "true"
 
       - name: Build production APK
         run: flutter build apk --flavor production -t lib/main_production.dart
 
       - name: Upload production APK to Google Drive
-        env:
-          GDRIVE_SERVICE_ACCOUNT: ${{ secrets.GDRIVE_SERVICE_ACCOUNT }}
+        uses: adityak74/google-drive-upload-git-action@main
+        with:
+          credentials: ${{ secrets.GDRIVE_SERVICE_ACCOUNT }}
+          filename: "build/app/outputs/flutter-apk/app-production-release.apk"
+          folderId: 1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0
+          name: "app-production-release.apk"
+          overwrite: "true"
+
+      - name: Make Directory Structure
         run: |
-          echo "$GDRIVE_SERVICE_ACCOUNT" > service_account.json
-          gdrive upload --service-account service_account.json --parent '1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0' --name app-production-release.apk build/app/outputs/flutter-apk/app-production-release.apk
+          mkdir -p w/x/y
+          date +%s > w/x/y/z
+
+      - name: Mirror Directory Structure
+        uses: adityak74/google-drive-upload-git-action@main
+        with:
+          credentials: ${{ secrets.GDRIVE_SERVICE_ACCOUNT }}
+          filename: w/x/y/z
+          folderId: 1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0
+          overwrite: "true"
+          mirrorDirectoryStructure: "true"
