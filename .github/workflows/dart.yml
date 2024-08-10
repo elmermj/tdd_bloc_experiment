@@ -51,17 +51,3 @@ jobs:
           folderId: 1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0
           name: "app-production-release.apk"
           overwrite: "true"
-
-      - name: Make Directory Structure
-        run: |
-          mkdir -p w/x/y
-          date +%s > w/x/y/z
-
-      - name: Mirror Directory Structure
-        uses: adityak74/google-drive-upload-git-action@main
-        with:
-          credentials: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_BASE64 }}
-          filename: w/x/y/z
-          folderId: 1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0
-          overwrite: "true"
-          mirrorDirectoryStructure: "true"
