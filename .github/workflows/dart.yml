@@ -36,7 +36,7 @@ jobs:
         with:
           credentials: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_BASE64 }}
           filename: "build/app/outputs/flutter-apk/app-development-release.apk"
-          folderId: 1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0
+          folderId: ${{ secrets.FOLDER_ID }}
           name: "app-development-release.apk"
           overwrite: "true"
 
@@ -48,6 +48,6 @@ jobs:
         with:
           credentials: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_BASE64 }}
           filename: "build/app/outputs/flutter-apk/app-production-release.apk"
-          folderId: 1CzphxCRJLuoHqh-h_bVLPIq35tHF2YC0
+          folderId: ${{ secrets.FOLDER_ID }}
           name: "app-production-release.apk"
           overwrite: "true"
